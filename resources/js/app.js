@@ -1,39 +1,61 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
-import './bootstrap';
-import { createApp } from 'vue';
+require('./bootstrap');
+window.Vue = require('vue').default;
+// helpers
+// require('./helpers/filter')
+// moment
+import moment from 'moment';
+// progress bar
+import VueProgressBar from 'vue-progressbar'
 
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
+const progressbarOptions = {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  thickness: '5px',
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
 
-const app = createApp({});
+Vue.use(VueProgressBar, progressbarOptions)
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+// sweetalert
+import swal from 'sweetalert2'
+import 'sweetalert2/src/sweetalert2.scss'
+window.swal = swal
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+  })
+  window.toast = toast
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+// custom event
+window.Fire = new Vue();
 
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
+// vform
+import Form from 'vform';
+window.Form = Form;
+import {
+    HasError,
+    AlertError,
+  } from 'vform/src/components/bootstrap4'
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+// vue router
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+import routes from './router/index';
 
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+})
 
-app.mount('#app');
+const app = new Vue({
+    el: '#app',
+    router,
+
+});
