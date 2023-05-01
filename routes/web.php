@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DivisionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,7 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function(){
     Route::get('dashboard', function(){
         return view('layouts.admin.app');
     });
+    //Division route
+    Route::get('division', [DivisionController::class, 'index']);
 
 });
