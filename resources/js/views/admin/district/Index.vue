@@ -3,15 +3,15 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Division List</h1>
+                    <div class="col-sm-3">
+                        <h1>District List</h1>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item">
                                 <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Division</li>
+                            <li class="breadcrumb-item active">District</li>
                         </ol>
                     </div>
                 </div>
@@ -29,10 +29,10 @@
                                 
                                 <div class="card-tools">
                                     <button
-                                        @click = "createDivision"
+                                        @click = "createDistrict"
                                         class="btn btn-success btn-md"
                                     >
-                                        Add Division
+                                        Add District
                                         <i class="fas fa-plus fa-fw"></i>
                                     </button>
                                 </div>
@@ -46,28 +46,30 @@
                                     <thead>
                                         <tr>
                                             <th>SI</th>
+                                            <th>Division</th>
                                             <th>Name</th>
                                             <th>Slug</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody v-if="divisions.length > 0">
-                                        <tr v-for="(division,index) in divisions" :key="division.id">
+                                    <tbody v-if="districts.length > 0">
+                                        <tr v-for="(district,index) in districts" :key="district.id">
                                             <td>{{index + 1}}</td>
-                                            <td>{{division.name | capitalize }}</td>
-                                            <td>{{division.slug }}</td>
-                                            <td>{{division.created_at | formatDate}}</td>
+                                            <td>{{district.division_id }}</td>
+                                            <td>{{district.name | capitalize }}</td>
+                                            <td>{{district.slug }}</td>
+                                            <td>{{district.created_at | formatDate}}</td>
                                             
                                             <td>
                                                 <button
-                                                    @click="editDivision(division)"
+                                                    @click="editDistrict(district)"
                                                     class="btn btn-primary btn-sm"
                                                 >
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button
-                                                    @click="deleteDivision(division.id)"
+                                                    @click="deleteDistrict(district.id)"
                                                     class="btn btn-danger btn-sm"
                                                 >
                                                     <i class="fas fa-trash"></i>
@@ -91,20 +93,20 @@
 
         <div
             class="modal fade"
-            id="addDivisionModal"
+            id="addDistrictModal"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="addDivisionModal"
+            aria-labelledby="addDistrictModal"
             aria-hidden="true"
         >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 v-if="editMode" class="modal-title" id="addDivisionModal">
-                            edit Division <i class="fas fa-edit fa-fw"></i>
+                        <h5 v-if="editMode" class="modal-title" id="addDistrictModal">
+                            edit District <i class="fas fa-edit fa-fw"></i>
                         </h5>
-                        <h5 v-else class="modal-title" id="addDivisionModal">
-                            Add Division <i class="fas fa-plus fa-fw"></i>
+                        <h5 v-else class="modal-title" id="addDistrictModal">
+                            Add District <i class="fas fa-plus fa-fw"></i>
                         </h5>
 
                         <button
@@ -117,9 +119,20 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                     <form @submit.prevent="editMode ? updateDivision() : addDivision()" @keydown="form.onKeydown($event)">
+                     <form @submit.prevent="editMode ? updateDistrict() : addDistrict()" @keydown="form.onKeydown($event)">
                         <div class="modal-body">
-                               
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"
+                                        >User Type</label
+                                    >
+                                <select class="form-control" v-model="form.division" :class="{ 'is-invalid': form.errors.has('division') }">
+                                        <option value="">Select Role</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Author</option>
+                                        <option value="3">User</option>
+                                </select>
+                                </div>
+                                <HasError :form="form" field="division" />
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"
                                         >Name</label
@@ -167,40 +180,41 @@ export default {
          form : new Form({
             id:'',
             name: '',
+            division: ''
         }),
-        divisions: {},
+        districts: {},
         editMode : false
       }
    },
 
    mounted(){
-        this.getDivision();
+        this.getDistrict();
    },
 
     methods:{
-        async getDivision(){
+        async getDistrict(){
            this.$Progress.start()
-           await this.form.get('/admin/division')
+           await this.form.get('/admin/district')
             .then(res => {
-                this.divisions = res.data
+                this.districts = res.data
                 this.$Progress.finish()
             })
             .catch(e => {
                 this.$Progress.fail()
             })
         },
-        async addDivision(){
+        async addDistrict(){
              this.$Progress.start()
-            await this.form.post('/admin/division-store')
+            await this.form.post('/admin/district-store')
             .then(res => {
                 if(this.form.successful){
-                    $('#addDivisionModal').modal('hide')
+                    $('#addDistrictModal').modal('hide')
                     toast.fire({
                         icon: 'success',
-                        title: "Division Created Successfully"
+                        title: "District Created Successfully"
                     })
 
-                    this.getDivision();
+                    this.getDistrict();
                     this.$Progress.finish()
                 }
             })
@@ -208,24 +222,24 @@ export default {
                  this.$Progress.fail()
             })
         },
-        editDivision(division){
+        editDistrict(district){
             this.editMode = true;
             this.form.clear();
             this.form.reset();
-            this.form.fill(division);
-            $('#addDivisionModal').modal('show')
+            this.form.fill(district);
+            $('#addDistrictModal').modal('show')
         },
-        async updateDivision(){
+        async updateDistrict(){
              this.$Progress.start()
-             await this.form.put('/admin/division-update/'+this.form.id)
+             await this.form.put('/admin/district-update/'+this.form.id)
              .then(res=>{
                  if(this.form.successful){
-                    $('#addDivisionModal').modal('hide')
+                    $('#addDistrictModal').modal('hide')
                     toast.fire({
                         icon: 'success',
-                        title: "Division Updated Successfully"
+                        title: "District Updated Successfully"
                     })
-                     this.getDivision();
+                     this.getDistrict();
                     this.$Progress.finish()
                 }
              })
@@ -235,15 +249,15 @@ export default {
 
         },
          closeModal(){
-             $('#addDivisionModal').modal('hide')
+             $('#addDistrictModal').modal('hide')
         },
-        createDivision(){
+        createDistrict(){
             this.editMode = false;
             this.form.clear();
             this.form.reset();
-            $('#addDivisionModal').modal('show')
+            $('#addDistrictModal').modal('show')
         },
-        deleteDivision(id){
+        deleteDistrict(id){
             swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -254,14 +268,14 @@ export default {
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                this.form.delete('/admin/division-delete/'+id)
+                this.form.delete('/admin/district-delete/'+id)
                 .then(res => {
                     swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
                     'success'
                     )
-                     this.getDivision();
+                     this.getDistrict();
                 })
                 .catch(error => {
                      swal.fire(

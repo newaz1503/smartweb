@@ -1,9 +1,9 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_admin_division_Index_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_admin_district_Index_vue"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -20,17 +20,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       form: new Form({
         id: '',
-        name: ''
+        name: '',
+        division: ''
       }),
-      divisions: {},
+      districts: {},
       editMode: false
     };
   },
   mounted: function mounted() {
-    this.getDivision();
+    this.getDistrict();
   },
   methods: {
-    getDivision: function getDivision() {
+    getDistrict: function getDistrict() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -38,8 +39,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this.$Progress.start();
               _context.next = 3;
-              return _this.form.get('/admin/division').then(function (res) {
-                _this.divisions = res.data;
+              return _this.form.get('/admin/district').then(function (res) {
+                _this.districts = res.data;
                 _this.$Progress.finish();
               })["catch"](function (e) {
                 _this.$Progress.fail();
@@ -51,7 +52,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    addDivision: function addDivision() {
+    addDistrict: function addDistrict() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -59,14 +60,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this2.$Progress.start();
               _context2.next = 3;
-              return _this2.form.post('/admin/division-store').then(function (res) {
+              return _this2.form.post('/admin/district-store').then(function (res) {
                 if (_this2.form.successful) {
-                  $('#addDivisionModal').modal('hide');
+                  $('#addDistrictModal').modal('hide');
                   toast.fire({
                     icon: 'success',
-                    title: "Division Created Successfully"
+                    title: "District Created Successfully"
                   });
-                  _this2.getDivision();
+                  _this2.getDistrict();
                   _this2.$Progress.finish();
                 }
               })["catch"](function (e) {
@@ -79,14 +80,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    editDivision: function editDivision(division) {
+    editDistrict: function editDistrict(district) {
       this.editMode = true;
       this.form.clear();
       this.form.reset();
-      this.form.fill(division);
-      $('#addDivisionModal').modal('show');
+      this.form.fill(district);
+      $('#addDistrictModal').modal('show');
     },
-    updateDivision: function updateDivision() {
+    updateDistrict: function updateDistrict() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -94,14 +95,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this3.$Progress.start();
               _context3.next = 3;
-              return _this3.form.put('/admin/division-update/' + _this3.form.id).then(function (res) {
+              return _this3.form.put('/admin/district-update/' + _this3.form.id).then(function (res) {
                 if (_this3.form.successful) {
-                  $('#addDivisionModal').modal('hide');
+                  $('#addDistrictModal').modal('hide');
                   toast.fire({
                     icon: 'success',
-                    title: "Division Updated Successfully"
+                    title: "District Updated Successfully"
                   });
-                  _this3.getDivision();
+                  _this3.getDistrict();
                   _this3.$Progress.finish();
                 }
               })["catch"](function (e) {
@@ -115,15 +116,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     closeModal: function closeModal() {
-      $('#addDivisionModal').modal('hide');
+      $('#addDistrictModal').modal('hide');
     },
-    createDivision: function createDivision() {
+    createDistrict: function createDistrict() {
       this.editMode = false;
       this.form.clear();
       this.form.reset();
-      $('#addDivisionModal').modal('show');
+      $('#addDistrictModal').modal('show');
     },
-    deleteDivision: function deleteDivision(id) {
+    deleteDistrict: function deleteDistrict(id) {
       var _this4 = this;
       swal.fire({
         title: 'Are you sure?',
@@ -135,9 +136,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this4.form["delete"]('/admin/division-delete/' + id).then(function (res) {
+          _this4.form["delete"]('/admin/district-delete/' + id).then(function (res) {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-            _this4.getDivision();
+            _this4.getDistrict();
           })["catch"](function (error) {
             swal.fire('Failed!', 'Something went wrong', 'warning');
           });
@@ -149,9 +150,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -180,9 +181,9 @@ var render = function render() {
   }, [_c("button", {
     staticClass: "btn btn-success btn-md",
     on: {
-      click: _vm.createDivision
+      click: _vm.createDistrict
     }
-  }, [_vm._v("\n                                    Add Division\n                                    "), _c("i", {
+  }, [_vm._v("\n                                    Add District\n                                    "), _c("i", {
     staticClass: "fas fa-plus fa-fw"
   })])])]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
@@ -191,14 +192,14 @@ var render = function render() {
     attrs: {
       id: "example2"
     }
-  }, [_vm._m(1), _vm._v(" "), _vm.divisions.length > 0 ? _c("tbody", _vm._l(_vm.divisions, function (division, index) {
+  }, [_vm._m(1), _vm._v(" "), _vm.districts.length > 0 ? _c("tbody", _vm._l(_vm.districts, function (district, index) {
     return _c("tr", {
-      key: division.id
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(division.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(division.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(division.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
+      key: district.id
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.division_id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(district.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(district.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-primary btn-sm",
       on: {
         click: function click($event) {
-          return _vm.editDivision(division);
+          return _vm.editDistrict(district);
         }
       }
     }, [_c("i", {
@@ -207,7 +208,7 @@ var render = function render() {
       staticClass: "btn btn-danger btn-sm",
       on: {
         click: function click($event) {
-          return _vm.deleteDivision(division.id);
+          return _vm.deleteDistrict(district.id);
         }
       }
     }, [_c("i", {
@@ -216,10 +217,10 @@ var render = function render() {
   }), 0) : _vm._e()])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "modal fade",
     attrs: {
-      id: "addDivisionModal",
+      id: "addDistrictModal",
       tabindex: "-1",
       role: "dialog",
-      "aria-labelledby": "addDivisionModal",
+      "aria-labelledby": "addDistrictModal",
       "aria-hidden": "true"
     }
   }, [_c("div", {
@@ -234,16 +235,16 @@ var render = function render() {
   }, [_vm.editMode ? _c("h5", {
     staticClass: "modal-title",
     attrs: {
-      id: "addDivisionModal"
+      id: "addDistrictModal"
     }
-  }, [_vm._v("\n                        edit Division "), _c("i", {
+  }, [_vm._v("\n                        edit District "), _c("i", {
     staticClass: "fas fa-edit fa-fw"
   })]) : _c("h5", {
     staticClass: "modal-title",
     attrs: {
-      id: "addDivisionModal"
+      id: "addDistrictModal"
     }
-  }, [_vm._v("\n                        Add Division "), _c("i", {
+  }, [_vm._v("\n                        Add District "), _c("i", {
     staticClass: "fas fa-plus fa-fw"
   })]), _vm._v(" "), _c("button", {
     staticClass: "close",
@@ -263,7 +264,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        _vm.editMode ? _vm.updateDivision() : _vm.addDivision();
+        _vm.editMode ? _vm.updateDistrict() : _vm.addDistrict();
       },
       keydown: function keydown($event) {
         return _vm.form.onKeydown($event);
@@ -272,6 +273,55 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "modal-body"
   }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "exampleInputEmail1"
+    }
+  }, [_vm._v("User Type")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.division,
+      expression: "form.division"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.form.errors.has("division")
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.form, "division", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v("Select Role")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "1"
+    }
+  }, [_vm._v("Admin")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "2"
+    }
+  }, [_vm._v("Author")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "3"
+    }
+  }, [_vm._v("User")])])]), _vm._v(" "), _c("HasError", {
+    attrs: {
+      form: _vm.form,
+      field: "division"
+    }
+  }), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -307,7 +357,7 @@ var render = function render() {
       form: _vm.form,
       field: "name"
     }
-  })], 1)]), _vm._v(" "), _c("div", {
+  })], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-danger",
@@ -342,9 +392,9 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "row mb-2"
   }, [_c("div", {
-    staticClass: "col-sm-6"
-  }, [_c("h1", [_vm._v("Division List")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-sm-6"
+    staticClass: "col-sm-3"
+  }, [_c("h1", [_vm._v("District List")])]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-3"
   }, [_c("ol", {
     staticClass: "breadcrumb float-sm-right"
   }, [_c("li", {
@@ -355,20 +405,20 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("Home")])]), _vm._v(" "), _c("li", {
     staticClass: "breadcrumb-item active"
-  }, [_vm._v("Division")])])])])])]);
+  }, [_vm._v("District")])])])])])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("SI")]), _vm._v(" "), _c("th", [_vm._v("Name")]), _vm._v(" "), _c("th", [_vm._v("Slug")]), _vm._v(" "), _c("th", [_vm._v("Created At")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("SI")]), _vm._v(" "), _c("th", [_vm._v("Division")]), _vm._v(" "), _c("th", [_vm._v("Name")]), _vm._v(" "), _c("th", [_vm._v("Slug")]), _vm._v(" "), _c("th", [_vm._v("Created At")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
 }];
 render._withStripped = true;
 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/division/Index.vue":
+/***/ "./resources/js/views/admin/district/Index.vue":
 /*!*****************************************************!*\
-  !*** ./resources/js/views/admin/division/Index.vue ***!
+  !*** ./resources/js/views/admin/district/Index.vue ***!
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -376,8 +426,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=33c1550f& */ "./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f&");
-/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=aab81aa0& */ "./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -388,8 +438,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -399,14 +449,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/division/Index.vue"
+component.options.__file = "resources/js/views/admin/district/Index.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
-  !*** ./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -414,23 +464,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f&":
+/***/ "./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&":
 /*!************************************************************************************!*\
-  !*** ./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f& ***!
+  !*** ./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0& ***!
   \************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_33c1550f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=33c1550f& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/division/Index.vue?vue&type=template&id=33c1550f&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=aab81aa0& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&");
 
 
 /***/ })

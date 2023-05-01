@@ -2,7 +2,7 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
 // helpers
-// require('./helpers/filter')
+require('./helpers/filter')
 // moment
 import moment from 'moment';
 // progress bar

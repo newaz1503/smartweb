@@ -41,6 +41,7 @@
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
           <router-view></router-view>
+          <vue-progress-bar></vue-progress-bar>
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

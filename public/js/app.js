@@ -5323,7 +5323,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 // helpers
-// require('./helpers/filter')
+__webpack_require__(/*! ./helpers/filter */ "./resources/js/helpers/filter.js");
 // moment
 
 // progress bar
@@ -5421,6 +5421,25 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/helpers/filter.js":
+/*!****************************************!*\
+  !*** ./resources/js/helpers/filter.js ***!
+  \****************************************/
+/***/ (() => {
+
+// capitalize text
+Vue.filter('capitalize', function (value) {
+  if (!value) return '';
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.slice(1);
+});
+// format date
+Vue.filter('formatDate', function (value) {
+  return moment(value).format('ll');
+});
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -5445,6 +5464,14 @@ var routes = [{
   name: 'division',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_admin_division_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/admin/division/Index.vue */ "./resources/js/views/admin/division/Index.vue"));
+  }
+},
+//district route
+{
+  path: '/admin/district',
+  name: 'district',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_views_admin_district_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/admin/district/Index.vue */ "./resources/js/views/admin/district/Index.vue"));
   }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
@@ -53226,7 +53253,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_admin_DashboardComponent_vue":1,"resources_js_views_admin_division_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_admin_DashboardComponent_vue":1,"resources_js_views_admin_division_Index_vue":1,"resources_js_views_admin_district_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

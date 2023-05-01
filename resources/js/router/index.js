@@ -10,6 +10,12 @@ const routes = [
         name: 'division',
         component: () => import('../views/admin/division/Index.vue')
     },
+     //district route
+     {
+        path: '/admin/district',
+        name: 'district',
+        component: () => import('../views/admin/district/Index.vue')
+    },
   ]
 
   export default routes;

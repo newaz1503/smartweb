@@ -38,7 +38,14 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Division
-
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name: 'district'}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                District
               </p>
             </router-link>
           </li>
