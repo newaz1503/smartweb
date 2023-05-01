@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\DivisionController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function(){
-    Route::get('dashboard', function(){
-        return view('layouts.admin.app');
-    });
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
     //Division route
     Route::get('division', [DivisionController::class, 'index']);

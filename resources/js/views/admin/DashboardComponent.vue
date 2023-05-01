@@ -7,10 +7,7 @@
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
+            
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -22,65 +19,52 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{users}}</h3>
 
-                <p>New Orders</p>
+                <p>Total User</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a to="javascript:void(0)" class="small-box-footer">view</a>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{divisions}}</h3>
 
-                <p>Bounce Rate</p>
+                <p>Total Division</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="/admin/division" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{districts}}</h3>
 
-                <p>User Registrations</p>
+                <p>Total District</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <router-link to="/admin/district" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+          
           <!-- ./col -->
         </div>
         <!-- /.row -->
@@ -91,7 +75,33 @@
 
   <script>
     export default {
-
+        data(){
+            return{
+                users: '',
+                divisions: '',
+                districts: '',
+            }
+        },
+        mounted(){
+            this.dashboardInfo();
+        },
+        methods:{
+            async dashboardInfo(){
+                 this.$Progress.start()
+                 await axios.get('/admin/dashboard')
+                    .then(res => {
+                        
+                        this.users = res.data.users
+                        this.divisions = res.data.divisions
+                        this.districts = res.data.districts
+                       
+                        this.$Progress.finish()
+                    })
+                    .catch(e => {
+                        this.$Progress.fail()
+                    })
+            }
+        }
     }
   </script>
 
