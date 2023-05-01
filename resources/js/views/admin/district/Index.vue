@@ -56,12 +56,13 @@
                                     <tbody v-if="districts.length > 0">
                                         <tr v-for="(district,index) in districts" :key="district.id">
                                             <td>{{index + 1}}</td>
-                                            <td>{{district.division_id }}</td>
+                                            <td v-if="district.division">{{district.division.name }}</td>
                                             <td>{{district.name | capitalize }}</td>
                                             <td>{{district.slug }}</td>
                                             <td>{{district.created_at | formatDate}}</td>
                                             
                                             <td>
+                                                
                                                 <button
                                                     @click="editDistrict(district)"
                                                     class="btn btn-primary btn-sm"
@@ -123,16 +124,14 @@
                         <div class="modal-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"
-                                        >User Type</label
+                                        >Division</label
                                     >
-                                <select class="form-control" v-model="form.division" :class="{ 'is-invalid': form.errors.has('division') }">
-                                        <option value="">Select Role</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Author</option>
-                                        <option value="3">User</option>
+                                <select class="form-control" v-model="form.division_id" :class="{ 'is-invalid': form.errors.has('division_id') }">
+                                        <option value="" disabled selected>Select Division</option>
+                                        <option :value="division.id" v-for="division in divisions" :key="division.id">{{division.name}}</option>
                                 </select>
                                 </div>
-                                <HasError :form="form" field="division" />
+                                <HasError :form="form" field="division_id" />
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"
                                         >Name</label
@@ -180,18 +179,30 @@ export default {
          form : new Form({
             id:'',
             name: '',
-            division: ''
+            division_id: ''
         }),
         districts: {},
+        divisions: {},
         editMode : false
       }
    },
 
    mounted(){
         this.getDistrict();
+        this.getDivision();
    },
 
     methods:{
+        async getDivision(){
+            await this.form.get('/admin/division')
+            .then(res => {
+                this.divisions = res.data
+                this.$Progress.finish()
+            })
+            .catch(e => {
+                this.$Progress.fail()
+            })
+        },
         async getDistrict(){
            this.$Progress.start()
            await this.form.get('/admin/district')
@@ -276,6 +287,10 @@ export default {
                     'success'
                     )
                      this.getDistrict();
+                      toast.fire({
+                        icon: 'success',
+                        title: "District Deleted Successfully"
+                    })
                 })
                 .catch(error => {
                      swal.fire(

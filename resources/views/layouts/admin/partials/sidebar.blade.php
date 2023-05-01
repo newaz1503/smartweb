@@ -35,7 +35,7 @@
           </li>
           <li class="nav-item">
             <router-link :to="{name: 'division'}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-columns"></i>
               <p>
                 Division
               </p>
@@ -43,7 +43,7 @@
           </li>
           <li class="nav-item">
             <router-link :to="{name: 'district'}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 District
               </p>
@@ -57,13 +57,9 @@
                <p>
                  Logout
                </p>
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            </a>            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
-
-
           </li>
 
         </ul>

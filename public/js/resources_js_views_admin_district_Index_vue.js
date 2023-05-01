@@ -21,38 +21,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new Form({
         id: '',
         name: '',
-        division: ''
+        division_id: ''
       }),
       districts: {},
+      divisions: {},
       editMode: false
     };
   },
   mounted: function mounted() {
     this.getDistrict();
+    this.getDivision();
   },
   methods: {
-    getDistrict: function getDistrict() {
+    getDivision: function getDivision() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _this.$Progress.start();
-              _context.next = 3;
-              return _this.form.get('/admin/district').then(function (res) {
-                _this.districts = res.data;
+              _context.next = 2;
+              return _this.form.get('/admin/division').then(function (res) {
+                _this.divisions = res.data;
                 _this.$Progress.finish();
               })["catch"](function (e) {
                 _this.$Progress.fail();
               });
-            case 3:
+            case 2:
             case "end":
               return _context.stop();
           }
         }, _callee);
       }))();
     },
-    addDistrict: function addDistrict() {
+    getDistrict: function getDistrict() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -60,16 +61,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this2.$Progress.start();
               _context2.next = 3;
-              return _this2.form.post('/admin/district-store').then(function (res) {
-                if (_this2.form.successful) {
-                  $('#addDistrictModal').modal('hide');
-                  toast.fire({
-                    icon: 'success',
-                    title: "District Created Successfully"
-                  });
-                  _this2.getDistrict();
-                  _this2.$Progress.finish();
-                }
+              return _this2.form.get('/admin/district').then(function (res) {
+                _this2.districts = res.data;
+                _this2.$Progress.finish();
               })["catch"](function (e) {
                 _this2.$Progress.fail();
               });
@@ -80,14 +74,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    editDistrict: function editDistrict(district) {
-      this.editMode = true;
-      this.form.clear();
-      this.form.reset();
-      this.form.fill(district);
-      $('#addDistrictModal').modal('show');
-    },
-    updateDistrict: function updateDistrict() {
+    addDistrict: function addDistrict() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -95,12 +82,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this3.$Progress.start();
               _context3.next = 3;
-              return _this3.form.put('/admin/district-update/' + _this3.form.id).then(function (res) {
+              return _this3.form.post('/admin/district-store').then(function (res) {
                 if (_this3.form.successful) {
                   $('#addDistrictModal').modal('hide');
                   toast.fire({
                     icon: 'success',
-                    title: "District Updated Successfully"
+                    title: "District Created Successfully"
                   });
                   _this3.getDistrict();
                   _this3.$Progress.finish();
@@ -115,6 +102,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    editDistrict: function editDistrict(district) {
+      this.editMode = true;
+      this.form.clear();
+      this.form.reset();
+      this.form.fill(district);
+      $('#addDistrictModal').modal('show');
+    },
+    updateDistrict: function updateDistrict() {
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _this4.$Progress.start();
+              _context4.next = 3;
+              return _this4.form.put('/admin/district-update/' + _this4.form.id).then(function (res) {
+                if (_this4.form.successful) {
+                  $('#addDistrictModal').modal('hide');
+                  toast.fire({
+                    icon: 'success',
+                    title: "District Updated Successfully"
+                  });
+                  _this4.getDistrict();
+                  _this4.$Progress.finish();
+                }
+              })["catch"](function (e) {
+                _this4.$Progress.fail();
+              });
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4);
+      }))();
+    },
     closeModal: function closeModal() {
       $('#addDistrictModal').modal('hide');
     },
@@ -125,7 +147,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $('#addDistrictModal').modal('show');
     },
     deleteDistrict: function deleteDistrict(id) {
-      var _this4 = this;
+      var _this5 = this;
       swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -136,9 +158,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this4.form["delete"]('/admin/district-delete/' + id).then(function (res) {
+          _this5.form["delete"]('/admin/district-delete/' + id).then(function (res) {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-            _this4.getDistrict();
+            _this5.getDistrict();
+            toast.fire({
+              icon: 'success',
+              title: "District Deleted Successfully"
+            });
           })["catch"](function (error) {
             swal.fire('Failed!', 'Something went wrong', 'warning');
           });
@@ -195,7 +221,7 @@ var render = function render() {
   }, [_vm._m(1), _vm._v(" "), _vm.districts.length > 0 ? _c("tbody", _vm._l(_vm.districts, function (district, index) {
     return _c("tr", {
       key: district.id
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.division_id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(district.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(district.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), district.division ? _c("td", [_vm._v(_vm._s(district.division.name))]) : _vm._e(), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(district.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(district.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-primary btn-sm",
       on: {
         click: function click($event) {
@@ -278,16 +304,16 @@ var render = function render() {
     attrs: {
       "for": "exampleInputEmail1"
     }
-  }, [_vm._v("User Type")]), _vm._v(" "), _c("select", {
+  }, [_vm._v("Division")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.form.division,
-      expression: "form.division"
+      value: _vm.form.division_id,
+      expression: "form.division_id"
     }],
     staticClass: "form-control",
     "class": {
-      "is-invalid": _vm.form.errors.has("division")
+      "is-invalid": _vm.form.errors.has("division_id")
     },
     on: {
       change: function change($event) {
@@ -297,29 +323,26 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.$set(_vm.form, "division", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.form, "division_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, [_c("option", {
     attrs: {
-      value: ""
+      value: "",
+      disabled: "",
+      selected: ""
     }
-  }, [_vm._v("Select Role")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "1"
-    }
-  }, [_vm._v("Admin")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "2"
-    }
-  }, [_vm._v("Author")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "3"
-    }
-  }, [_vm._v("User")])])]), _vm._v(" "), _c("HasError", {
+  }, [_vm._v("Select Division")]), _vm._v(" "), _vm._l(_vm.divisions, function (division) {
+    return _c("option", {
+      key: division.id,
+      domProps: {
+        value: division.id
+      }
+    }, [_vm._v(_vm._s(division.name))]);
+  })], 2)]), _vm._v(" "), _c("HasError", {
     attrs: {
       form: _vm.form,
-      field: "division"
+      field: "division_id"
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "form-group"

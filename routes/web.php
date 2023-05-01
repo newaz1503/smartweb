@@ -27,11 +27,12 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function(){
     Route::get('dashboard', function(){
         return view('layouts.admin.app');
     });
-    
+
     //Division route
     Route::get('division', [DivisionController::class, 'index']);
     Route::post('division-store', [DivisionController::class, 'store']);
     Route::put('division-update/{id}', [DivisionController::class, 'update']);
+    Route::get('district-by-division/{id}', [DivisionController::class, 'show']);
     Route::delete('division-delete/{id}', [DivisionController::class, 'destroy']);
      //District route
      Route::get('district', [DistrictController::class, 'index']);

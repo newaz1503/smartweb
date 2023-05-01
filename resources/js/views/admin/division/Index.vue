@@ -60,6 +60,12 @@
                                             <td>{{division.created_at | formatDate}}</td>
                                             
                                             <td>
+                                                 <button
+                                                    @click="showDistrict(division.id)"
+                                                    class="btn btn-info btn-sm"
+                                                >
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
                                                 <button
                                                     @click="editDivision(division)"
                                                     class="btn btn-primary btn-sm"
@@ -88,7 +94,6 @@
             <!-- /.container-fluid -->
         </section>
         <!-- add user modal -->
-
         <div
             class="modal fade"
             id="addDivisionModal"
@@ -157,6 +162,60 @@
                 </div>
             </div>
         </div>
+        <!-- show modal -->
+     <div
+            class="modal fade"
+            id="showDistDivModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="showDistDivModal"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >
+                            Show District <i class="fas fa-eye fa-fw"></i>
+                        </h5>
+                       
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                            @click="closeModal"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                     <form>
+                        <div class="modal-body">
+                               
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"
+                                        >District Name</label
+                                    >
+                                    <div mt-3>
+                                        <span class="btn btn-success btn-sm mr-1 mb-1" v-for="data in districtByDivision" :key="data.id">{{data.name}}</span>
+                                    </div>
+                                   
+                                </div>  
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                            @click="closeModal"
+                                type="button"
+                                class="btn btn-danger"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                          
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -169,6 +228,7 @@ export default {
             name: '',
         }),
         divisions: {},
+        districtByDivision : {},
         editMode : false
       }
    },
@@ -178,6 +238,18 @@ export default {
    },
 
     methods:{
+        async showDistrict(id){
+             this.$Progress.start()
+           await this.form.get('/admin/district-by-division/'+id)
+            .then(res => {
+                this.districtByDivision = res.data
+                 $('#showDistDivModal').modal('show')
+                this.$Progress.finish()
+            })
+            .catch(e => {
+                this.$Progress.fail()
+            })
+        },
         async getDivision(){
            this.$Progress.start()
            await this.form.get('/admin/division')
@@ -236,6 +308,7 @@ export default {
         },
          closeModal(){
              $('#addDivisionModal').modal('hide')
+               $('#showDistDivModal').modal('hide')
         },
         createDivision(){
             this.editMode = false;
@@ -262,6 +335,10 @@ export default {
                     'success'
                     )
                      this.getDivision();
+                     toast.fire({
+                        icon: 'success',
+                        title: "Division Deleted Successfully"
+                    })
                 })
                 .catch(error => {
                      swal.fire(

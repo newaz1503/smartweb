@@ -45,6 +45,18 @@ class DivisionController extends Controller
         ]);
     }
 
+    public function show($id){
+        $districtByDivision = Division::findOrFail($id)->districts;
+        if($districtByDivision){
+            return response()->json($districtByDivision);
+        }else{
+            return response()->json([
+                'Not found'
+            ], 404);
+        }
+       
+    }
+
     public function destroy($id){
         $division = Division::findOrFail($id);
         if($division){

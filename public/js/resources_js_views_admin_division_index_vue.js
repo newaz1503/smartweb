@@ -23,6 +23,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: ''
       }),
       divisions: {},
+      districtByDivision: {},
       editMode: false
     };
   },
@@ -30,7 +31,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDivision();
   },
   methods: {
-    getDivision: function getDivision() {
+    showDistrict: function showDistrict(id) {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -38,8 +39,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this.$Progress.start();
               _context.next = 3;
-              return _this.form.get('/admin/division').then(function (res) {
-                _this.divisions = res.data;
+              return _this.form.get('/admin/district-by-division/' + id).then(function (res) {
+                _this.districtByDivision = res.data;
+                $('#showDistDivModal').modal('show');
                 _this.$Progress.finish();
               })["catch"](function (e) {
                 _this.$Progress.fail();
@@ -51,7 +53,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    addDivision: function addDivision() {
+    getDivision: function getDivision() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -59,16 +61,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this2.$Progress.start();
               _context2.next = 3;
-              return _this2.form.post('/admin/division-store').then(function (res) {
-                if (_this2.form.successful) {
-                  $('#addDivisionModal').modal('hide');
-                  toast.fire({
-                    icon: 'success',
-                    title: "Division Created Successfully"
-                  });
-                  _this2.getDivision();
-                  _this2.$Progress.finish();
-                }
+              return _this2.form.get('/admin/division').then(function (res) {
+                _this2.divisions = res.data;
+                _this2.$Progress.finish();
               })["catch"](function (e) {
                 _this2.$Progress.fail();
               });
@@ -79,14 +74,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    editDivision: function editDivision(division) {
-      this.editMode = true;
-      this.form.clear();
-      this.form.reset();
-      this.form.fill(division);
-      $('#addDivisionModal').modal('show');
-    },
-    updateDivision: function updateDivision() {
+    addDivision: function addDivision() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -94,12 +82,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this3.$Progress.start();
               _context3.next = 3;
-              return _this3.form.put('/admin/division-update/' + _this3.form.id).then(function (res) {
+              return _this3.form.post('/admin/division-store').then(function (res) {
                 if (_this3.form.successful) {
                   $('#addDivisionModal').modal('hide');
                   toast.fire({
                     icon: 'success',
-                    title: "Division Updated Successfully"
+                    title: "Division Created Successfully"
                   });
                   _this3.getDivision();
                   _this3.$Progress.finish();
@@ -114,8 +102,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    editDivision: function editDivision(division) {
+      this.editMode = true;
+      this.form.clear();
+      this.form.reset();
+      this.form.fill(division);
+      $('#addDivisionModal').modal('show');
+    },
+    updateDivision: function updateDivision() {
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _this4.$Progress.start();
+              _context4.next = 3;
+              return _this4.form.put('/admin/division-update/' + _this4.form.id).then(function (res) {
+                if (_this4.form.successful) {
+                  $('#addDivisionModal').modal('hide');
+                  toast.fire({
+                    icon: 'success',
+                    title: "Division Updated Successfully"
+                  });
+                  _this4.getDivision();
+                  _this4.$Progress.finish();
+                }
+              })["catch"](function (e) {
+                _this4.$Progress.fail();
+              });
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4);
+      }))();
+    },
     closeModal: function closeModal() {
       $('#addDivisionModal').modal('hide');
+      $('#showDistDivModal').modal('hide');
     },
     createDivision: function createDivision() {
       this.editMode = false;
@@ -124,7 +148,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $('#addDivisionModal').modal('show');
     },
     deleteDivision: function deleteDivision(id) {
-      var _this4 = this;
+      var _this5 = this;
       swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -135,9 +159,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this4.form["delete"]('/admin/division-delete/' + id).then(function (res) {
+          _this5.form["delete"]('/admin/division-delete/' + id).then(function (res) {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-            _this4.getDivision();
+            _this5.getDivision();
+            toast.fire({
+              icon: 'success',
+              title: "Division Deleted Successfully"
+            });
           })["catch"](function (error) {
             swal.fire('Failed!', 'Something went wrong', 'warning');
           });
@@ -195,6 +223,15 @@ var render = function render() {
     return _c("tr", {
       key: division.id
     }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(division.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(division.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(division.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn btn-info btn-sm",
+      on: {
+        click: function click($event) {
+          return _vm.showDistrict(division.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-eye"
+    })]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-primary btn-sm",
       on: {
         click: function click($event) {
@@ -330,7 +367,67 @@ var render = function render() {
       type: "submit",
       disabled: _vm.form.busy
     }
-  }, [_vm._v("\n                            Submit\n                        ")])])])])])])]);
+  }, [_vm._v("\n                            Submit\n                        ")])])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "modal fade",
+    attrs: {
+      id: "showDistDivModal",
+      tabindex: "-1",
+      role: "dialog",
+      "aria-labelledby": "showDistDivModal",
+      "aria-hidden": "true"
+    }
+  }, [_c("div", {
+    staticClass: "modal-dialog",
+    attrs: {
+      role: "document"
+    }
+  }, [_c("div", {
+    staticClass: "modal-content"
+  }, [_c("div", {
+    staticClass: "modal-header"
+  }, [_vm._m(2), _vm._v(" "), _c("button", {
+    staticClass: "close",
+    attrs: {
+      type: "button",
+      "data-dismiss": "modal",
+      "aria-label": "Close"
+    },
+    on: {
+      click: _vm.closeModal
+    }
+  }, [_c("span", {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])])]), _vm._v(" "), _c("form", [_c("div", {
+    staticClass: "modal-body"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "exampleInputEmail1"
+    }
+  }, [_vm._v("District Name")]), _vm._v(" "), _c("div", {
+    attrs: {
+      "mt-3": ""
+    }
+  }, _vm._l(_vm.districtByDivision, function (data) {
+    return _c("span", {
+      key: data.id,
+      staticClass: "btn btn-success btn-sm mr-1 mb-1"
+    }, [_vm._v(_vm._s(data.name))]);
+  }), 0)])]), _vm._v(" "), _c("div", {
+    staticClass: "modal-footer"
+  }, [_c("button", {
+    staticClass: "btn btn-danger",
+    attrs: {
+      type: "button",
+      "data-dismiss": "modal"
+    },
+    on: {
+      click: _vm.closeModal
+    }
+  }, [_vm._v("\n                            Close\n                        ")])])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -360,6 +457,14 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", [_c("tr", [_c("th", [_vm._v("SI")]), _vm._v(" "), _c("th", [_vm._v("Name")]), _vm._v(" "), _c("th", [_vm._v("Slug")]), _vm._v(" "), _c("th", [_vm._v("Created At")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("h5", {
+    staticClass: "modal-title"
+  }, [_vm._v("\n                        Show District "), _c("i", {
+    staticClass: "fas fa-eye fa-fw"
+  })]);
 }];
 render._withStripped = true;
 

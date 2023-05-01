@@ -25,6 +25,12 @@
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/')}}/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/')}}/summernote/summernote-bs4.min.css">
+  <style>
+        .router-link-exact-active{
+            background-color: #007bff !important;
+            color: #fff!important;
+        }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 

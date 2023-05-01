@@ -13,17 +13,17 @@ class DistrictController extends Controller
         if($request->format() == 'html'){
             return view('layouts.admin.app');
         }
-        $districts = District::orderBy('id','Desc')->get();
+        $districts = District::with('division')->orderBy('id','Desc')->get();
         return response()->json($districts);
     }
     public function store(Request $request){
         $this->validate($request, [
-            'division' => 'bail|required',
+            'division_id' => 'bail|required',
             'name' => 'bail|required|string|max:100|unique:districts'
         ]);
         $slug = Str::slug($request->name);
         District::create([
-            'division_id' => $request->division,
+            'division_id' => $request->division_id,
             'name' => $request->name,
             'slug' => $slug
         ]);
@@ -34,12 +34,12 @@ class DistrictController extends Controller
     }
     public function update(Request $request, $id){
         $this->validate($request, [
-            'division' => 'bail|required',
+            'division_id' => 'bail|required',
             'name' => 'bail|required|string|max:100|unique:districts,name,'.$id
         ]);
         $slug = Str::slug($request->name);
         District::where('id', $id)->update([
-            'division_id' => $request->division,
+            'division_id' => $request->division_id,
             'name' => $request->name,
             'slug' => $slug
         ]);
