@@ -94,9 +94,9 @@
                                     <label for="exampleInputEmail1"
                                         >District</label
                                     >
-                                <select class="form-control" v-model="form.division_id" :class="{ 'is-invalid': form.errors.has('division_id') }">
+                                <select class="form-control" v-model="form.division_id" :class="{ 'is-invalid': form.errors.has('division_id') }" multiple>
                                         <option value="" disabled selected>Select Division</option>
-                                        <option :value="division.id" v-for="division in divisions" :key="division.id">{{division.name}}</option>
+                                        <option :value="division.id" v-for="division in districts" :key="division.id">{{division.name}}</option>
                                 </select>
                                 </div>
                                 <HasError :form="form" field="division_id" />
@@ -131,33 +131,21 @@ export default {
          form : new Form({
             id:'',
             name: '',
-            division_id: ''
+            division_id: []
         }),
-        districts: {},
-        divisions: {},
-        editMode : false
+        districts: [],
       }
    },
 
    mounted(){
-        this.getDistrict();
-        this.getDivision();
+        this.getDistrictNull();
    },
 
     methods:{
-        async getDivision(){
-            await this.form.get('/admin/division')
-            .then(res => {
-                this.divisions = res.data
-                this.$Progress.finish()
-            })
-            .catch(e => {
-                this.$Progress.fail()
-            })
-        },
-        async getDistrict(){
+
+        async getDistrictNull(){
            this.$Progress.start()
-           await this.form.get('/admin/district')
+           await this.form.get('/admin/division-district')
             .then(res => {
                 this.districts = res.data
                 this.$Progress.finish()
@@ -168,7 +156,7 @@ export default {
         },
         async addDistrict(){
              this.$Progress.start()
-            await this.form.post('/admin/district-store')
+            await this.form.post('/admin/divdist-store')
             .then(res => {
                 if(this.form.successful){
                     $('#addDivDistModal').modal('hide')

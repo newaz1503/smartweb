@@ -21,39 +21,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: new Form({
         id: '',
         name: '',
-        division_id: ''
+        division_id: []
       }),
-      districts: {},
-      divisions: {},
-      editMode: false
+      districts: []
     };
   },
   mounted: function mounted() {
-    this.getDistrict();
-    this.getDivision();
+    this.getDistrictNull();
   },
   methods: {
-    getDivision: function getDivision() {
+    getDistrictNull: function getDistrictNull() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.form.get('/admin/division').then(function (res) {
-                _this.divisions = res.data;
+              _this.$Progress.start();
+              _context.next = 3;
+              return _this.form.get('/admin/division-district').then(function (res) {
+                _this.districts = res.data;
                 _this.$Progress.finish();
               })["catch"](function (e) {
                 _this.$Progress.fail();
               });
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }
         }, _callee);
       }))();
     },
-    getDistrict: function getDistrict() {
+    addDistrict: function addDistrict() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -61,9 +59,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this2.$Progress.start();
               _context2.next = 3;
-              return _this2.form.get('/admin/district').then(function (res) {
-                _this2.districts = res.data;
-                _this2.$Progress.finish();
+              return _this2.form.post('/admin/divdist-store').then(function (res) {
+                if (_this2.form.successful) {
+                  $('#addDivDistModal').modal('hide');
+                  toast.fire({
+                    icon: 'success',
+                    title: "District Created Successfully"
+                  });
+                  _this2.getDistrict();
+                  _this2.$Progress.finish();
+                }
               })["catch"](function (e) {
                 _this2.$Progress.fail();
               });
@@ -72,34 +77,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _context2.stop();
           }
         }, _callee2);
-      }))();
-    },
-    addDistrict: function addDistrict() {
-      var _this3 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
-            case 0:
-              _this3.$Progress.start();
-              _context3.next = 3;
-              return _this3.form.post('/admin/district-store').then(function (res) {
-                if (_this3.form.successful) {
-                  $('#addDivDistModal').modal('hide');
-                  toast.fire({
-                    icon: 'success',
-                    title: "District Created Successfully"
-                  });
-                  _this3.getDistrict();
-                  _this3.$Progress.finish();
-                }
-              })["catch"](function (e) {
-                _this3.$Progress.fail();
-              });
-            case 3:
-            case "end":
-              return _context3.stop();
-          }
-        }, _callee3);
       }))();
     },
     closeModal: function closeModal() {
@@ -248,6 +225,9 @@ var render = function render() {
     "class": {
       "is-invalid": _vm.form.errors.has("division_id")
     },
+    attrs: {
+      multiple: ""
+    },
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -265,7 +245,7 @@ var render = function render() {
       disabled: "",
       selected: ""
     }
-  }, [_vm._v("Select Division")]), _vm._v(" "), _vm._l(_vm.divisions, function (division) {
+  }, [_vm._v("Select Division")]), _vm._v(" "), _vm._l(_vm.districts, function (division) {
     return _c("option", {
       key: division.id,
       domProps: {

@@ -6,6 +6,7 @@ use App\Models\Division;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\District;
 
 class DivisionController extends Controller
 {
@@ -75,5 +76,19 @@ class DivisionController extends Controller
         if($request->format() == 'html'){
             return view('layouts.admin.app');
         }
+        $districtNull = District::where('division_id', '=', '')->orWhereNull('division_id') ->get();
+        return response()->json($districtNull);
+
+    }
+    public function division_district_store(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        Division::create([
+            'name' => $request->name,
+        ]);
+
+        foreach()
+
     }
 }

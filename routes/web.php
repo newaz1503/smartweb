@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function(){
     Route::get('district-by-division/{id}', [DivisionController::class, 'show']);
     Route::delete('division-delete/{id}', [DivisionController::class, 'destroy']);
     Route::get('division-district', [DivisionController::class, 'division_district']);
+    Route::post('divdist-store', [DivisionController::class, 'division_district_store']);
     //District route
     Route::get('district', [DistrictController::class, 'index']);
     Route::post('district-store', [DistrictController::class, 'store']);
