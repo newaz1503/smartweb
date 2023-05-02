@@ -3,10 +3,10 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <h1>District List</h1>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item">
                                 <a href="#">Home</a>
@@ -26,7 +26,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                
+
                                 <div class="card-tools">
                                     <button
                                         @click = "createDistrict"
@@ -60,9 +60,9 @@
                                             <td>{{district.name | capitalize }}</td>
                                             <td>{{district.slug }}</td>
                                             <td>{{district.created_at | formatDate}}</td>
-                                            
+
                                             <td>
-                                                
+
                                                 <button
                                                     @click="editDistrict(district)"
                                                     class="btn btn-primary btn-sm"
@@ -147,7 +147,7 @@
                                     />
                                     <HasError :form="form" field="name" />
                                 </div>
-                                
+
                         </div>
                         <div class="modal-footer">
                             <button

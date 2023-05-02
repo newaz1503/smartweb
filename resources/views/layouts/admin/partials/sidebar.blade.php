@@ -15,7 +15,7 @@
         <div class="info">
           <a href="javascript: void(0)" class="d-block">@auth {{Auth::user()->name ?? '' }} @endauth</a>
           <small class="d-block text-white">@auth {{Auth::user()->email ?? '' }} @endauth</small>
-          
+
         </div>
       </div>
 
@@ -46,6 +46,14 @@
                 <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 District
+              </p>
+            </router-link>
+          </li>
+           <li class="nav-item">
+            <router-link :to="{name: 'division-district'}" class="nav-link">
+                <i class="nav-icon fas fa-newspaper"></i>
+              <p>
+                Division & District
               </p>
             </router-link>
           </li>

@@ -54,7 +54,7 @@ class DivisionController extends Controller
                 'Not found'
             ], 404);
         }
-       
+
     }
 
     public function destroy($id){
@@ -70,5 +70,10 @@ class DivisionController extends Controller
             'msg' => 'Division deleted'
         ], 200);
 
+    }
+    public function division_district(Request $request){
+        if($request->format() == 'html'){
+            return view('layouts.admin.app');
+        }
     }
 }

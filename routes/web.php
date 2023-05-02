@@ -33,10 +33,11 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function(){
     Route::put('division-update/{id}', [DivisionController::class, 'update']);
     Route::get('district-by-division/{id}', [DivisionController::class, 'show']);
     Route::delete('division-delete/{id}', [DivisionController::class, 'destroy']);
-     //District route
-     Route::get('district', [DistrictController::class, 'index']);
-     Route::post('district-store', [DistrictController::class, 'store']);
-     Route::put('district-update/{id}', [DistrictController::class, 'update']);
-     Route::delete('district-delete/{id}', [DistrictController::class, 'destroy']);
+    Route::get('division-district', [DivisionController::class, 'division_district']);
+    //District route
+    Route::get('district', [DistrictController::class, 'index']);
+    Route::post('district-store', [DistrictController::class, 'store']);
+    Route::put('district-update/{id}', [DistrictController::class, 'update']);
+    Route::delete('district-delete/{id}', [DistrictController::class, 'destroy']);
 
 });

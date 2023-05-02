@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_admin_district_Index_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_admin_divdist_Index_vue"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -84,7 +84,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context3.next = 3;
               return _this3.form.post('/admin/district-store').then(function (res) {
                 if (_this3.form.successful) {
-                  $('#addDistrictModal').modal('hide');
+                  $('#addDivDistModal').modal('hide');
                   toast.fire({
                     icon: 'success',
                     title: "District Created Successfully"
@@ -102,84 +102,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    editDistrict: function editDistrict(district) {
-      this.editMode = true;
-      this.form.clear();
-      this.form.reset();
-      this.form.fill(district);
-      $('#addDistrictModal').modal('show');
-    },
-    updateDistrict: function updateDistrict() {
-      var _this4 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
-            case 0:
-              _this4.$Progress.start();
-              _context4.next = 3;
-              return _this4.form.put('/admin/district-update/' + _this4.form.id).then(function (res) {
-                if (_this4.form.successful) {
-                  $('#addDistrictModal').modal('hide');
-                  toast.fire({
-                    icon: 'success',
-                    title: "District Updated Successfully"
-                  });
-                  _this4.getDistrict();
-                  _this4.$Progress.finish();
-                }
-              })["catch"](function (e) {
-                _this4.$Progress.fail();
-              });
-            case 3:
-            case "end":
-              return _context4.stop();
-          }
-        }, _callee4);
-      }))();
-    },
     closeModal: function closeModal() {
-      $('#addDistrictModal').modal('hide');
+      $('#addDivDistModal').modal('hide');
     },
-    createDistrict: function createDistrict() {
+    createDivDis: function createDivDis() {
       this.editMode = false;
       this.form.clear();
       this.form.reset();
-      $('#addDistrictModal').modal('show');
-    },
-    deleteDistrict: function deleteDistrict(id) {
-      var _this5 = this;
-      swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          _this5.form["delete"]('/admin/district-delete/' + id).then(function (res) {
-            swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-            _this5.getDistrict();
-            toast.fire({
-              icon: 'success',
-              title: "District Deleted Successfully"
-            });
-          })["catch"](function (error) {
-            swal.fire('Failed!', 'Something went wrong', 'warning');
-          });
-        }
-      });
+      $('#addDivDistModal').modal('show');
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -207,46 +147,17 @@ var render = function render() {
   }, [_c("button", {
     staticClass: "btn btn-success btn-md",
     on: {
-      click: _vm.createDistrict
+      click: _vm.createDivDis
     }
-  }, [_vm._v("\n                                    Add District\n                                    "), _c("i", {
+  }, [_vm._v("\n                                    Add Division District\n                                    "), _c("i", {
     staticClass: "fas fa-plus fa-fw"
-  })])])]), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
-  }, [_c("table", {
-    staticClass: "table table-bordered table-hover",
-    attrs: {
-      id: "example2"
-    }
-  }, [_vm._m(1), _vm._v(" "), _vm.districts.length > 0 ? _c("tbody", _vm._l(_vm.districts, function (district, index) {
-    return _c("tr", {
-      key: district.id
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), district.division ? _c("td", [_vm._v(_vm._s(district.division.name))]) : _vm._e(), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("capitalize")(district.name)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(district.slug))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm._f("formatDate")(district.created_at)))]), _vm._v(" "), _c("td", [_c("button", {
-      staticClass: "btn btn-primary btn-sm",
-      on: {
-        click: function click($event) {
-          return _vm.editDistrict(district);
-        }
-      }
-    }, [_c("i", {
-      staticClass: "fas fa-edit"
-    })]), _vm._v(" "), _c("button", {
-      staticClass: "btn btn-danger btn-sm",
-      on: {
-        click: function click($event) {
-          return _vm.deleteDistrict(district.id);
-        }
-      }
-    }, [_c("i", {
-      staticClass: "fas fa-trash"
-    })])])]);
-  }), 0) : _vm._e()])])])])])])]), _vm._v(" "), _c("div", {
+  })])])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "modal fade",
     attrs: {
-      id: "addDistrictModal",
+      id: "addDivDistModal",
       tabindex: "-1",
       role: "dialog",
-      "aria-labelledby": "addDistrictModal",
+      "aria-labelledby": "addDivDistModal",
       "aria-hidden": "true"
     }
   }, [_c("div", {
@@ -258,21 +169,7 @@ var render = function render() {
     staticClass: "modal-content"
   }, [_c("div", {
     staticClass: "modal-header"
-  }, [_vm.editMode ? _c("h5", {
-    staticClass: "modal-title",
-    attrs: {
-      id: "addDistrictModal"
-    }
-  }, [_vm._v("\n                        edit District "), _c("i", {
-    staticClass: "fas fa-edit fa-fw"
-  })]) : _c("h5", {
-    staticClass: "modal-title",
-    attrs: {
-      id: "addDistrictModal"
-    }
-  }, [_vm._v("\n                        Add District "), _c("i", {
-    staticClass: "fas fa-plus fa-fw"
-  })]), _vm._v(" "), _c("button", {
+  }, [_vm._m(1), _vm._v(" "), _c("button", {
     staticClass: "close",
     attrs: {
       type: "button",
@@ -290,7 +187,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        _vm.editMode ? _vm.updateDistrict() : _vm.addDistrict();
+        return _vm.addDistrict();
       },
       keydown: function keydown($event) {
         return _vm.form.onKeydown($event);
@@ -304,7 +201,43 @@ var render = function render() {
     attrs: {
       "for": "exampleInputEmail1"
     }
-  }, [_vm._v("Division")]), _vm._v(" "), _c("select", {
+  }, [_vm._v("Division Name")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.name,
+      expression: "form.name"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.form.errors.has("name")
+    },
+    attrs: {
+      type: "text",
+      "aria-describedby": "emailHelp",
+      placeholder: "Enter Name"
+    },
+    domProps: {
+      value: _vm.form.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "name", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("HasError", {
+    attrs: {
+      form: _vm.form,
+      field: "name"
+    }
+  })], 1), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "exampleInputEmail1"
+    }
+  }, [_vm._v("District")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -344,43 +277,7 @@ var render = function render() {
       form: _vm.form,
       field: "division_id"
     }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    attrs: {
-      "for": "exampleInputEmail1"
-    }
-  }, [_vm._v("Name")]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.form.name,
-      expression: "form.name"
-    }],
-    staticClass: "form-control",
-    "class": {
-      "is-invalid": _vm.form.errors.has("name")
-    },
-    attrs: {
-      type: "text",
-      "aria-describedby": "emailHelp",
-      placeholder: "Enter Name"
-    },
-    domProps: {
-      value: _vm.form.name
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.form, "name", $event.target.value);
-      }
-    }
-  }), _vm._v(" "), _c("HasError", {
-    attrs: {
-      form: _vm.form,
-      field: "name"
-    }
-  })], 1)], 1), _vm._v(" "), _c("div", {
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-danger",
@@ -391,13 +288,7 @@ var render = function render() {
     on: {
       click: _vm.closeModal
     }
-  }, [_vm._v("\n                            Close\n                        ")]), _vm._v(" "), _vm.editMode ? _c("button", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      type: "submit",
-      disabled: _vm.form.busy
-    }
-  }, [_vm._v("\n                            Update\n                        ")]) : _c("button", {
+  }, [_vm._v("\n                            Close\n                        ")]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "submit",
@@ -416,7 +307,7 @@ var staticRenderFns = [function () {
     staticClass: "row mb-2"
   }, [_c("div", {
     staticClass: "col-sm-6"
-  }, [_c("h1", [_vm._v("District List")])]), _vm._v(" "), _c("div", {
+  }, [_c("h1", [_vm._v("Division District List")])]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-6"
   }, [_c("ol", {
     staticClass: "breadcrumb float-sm-right"
@@ -428,29 +319,36 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("Home")])]), _vm._v(" "), _c("li", {
     staticClass: "breadcrumb-item active"
-  }, [_vm._v("District")])])])])])]);
+  }, [_vm._v("Division District")])])])])])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("SI")]), _vm._v(" "), _c("th", [_vm._v("Division")]), _vm._v(" "), _c("th", [_vm._v("Name")]), _vm._v(" "), _c("th", [_vm._v("Slug")]), _vm._v(" "), _c("th", [_vm._v("Created At")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+  return _c("h5", {
+    staticClass: "modal-title",
+    attrs: {
+      id: "addDistrictModal"
+    }
+  }, [_vm._v("\n                        Add District "), _c("i", {
+    staticClass: "fas fa-plus fa-fw"
+  })]);
 }];
 render._withStripped = true;
 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/district/Index.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/views/admin/district/Index.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/views/admin/divdist/Index.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/views/admin/divdist/Index.vue ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=aab81aa0& */ "./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&");
-/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=3262652a& */ "./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -461,8 +359,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -472,38 +370,38 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/admin/district/Index.vue"
+component.options.__file = "resources/js/views/admin/divdist/Index.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0& ***!
-  \************************************************************************************/
+/***/ "./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a& ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_aab81aa0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=aab81aa0& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/district/Index.vue?vue&type=template&id=aab81aa0&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3262652a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=3262652a& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/admin/divdist/Index.vue?vue&type=template&id=3262652a&");
 
 
 /***/ })
